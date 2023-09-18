@@ -1,0 +1,31 @@
+.container {
+  box-sizing: border-box;
+  border-top: 4px solid var(--black-2);
+  padding: 7px 30px 10px 30px;
+  display: flex;
+  justify-content: center;
+  min-width: 1180px;
+}
+
+.content {
+  width: 1180px;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.leftContent,
+.rightContent {
+  display: flex;
+  flex: 1;
+}
+
+.leftContent > button,
+.rightContent > button {
+  margin: 8px;
+}
+
+.rightContent {
+  justify-content: flex-end;
+}
