@@ -1,9 +1,51 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
+import debounce from "lodash.debounce";
 import styles from "./styles.module.css";
+
+import { saveHeatmapData } from "@/services/heatmap.services";
 
 type Props = {};
 
+var containerTag = "body";
+
 const TopPage: FC<Props> = () => {
+  useEffect(() => {
+    const save = async (data: { x: number; y: number; value: number }) => {
+      await saveHeatmapData({
+        endpoint: window.location.pathname,
+        pageCode: "TEST",
+        type: "click",
+        ...data,
+      });
+    };
+
+    const debouncedFetchData = debounce(save, 100);
+
+    document.addEventListener("click", function (event) {
+      var container = document.querySelector(containerTag) as HTMLElement;
+
+      var container = document.querySelector(containerTag) as HTMLElement;
+      console.log(container.clientWidth);
+      console.log(container.clientHeight);
+
+      var containerScrollX = container.scrollLeft;
+      var containerScrollY = container.scrollTop;
+
+      var x =
+        event.clientX -
+        container.getBoundingClientRect().left +
+        containerScrollX;
+      var y =
+        event.clientY -
+        container.getBoundingClientRect().top +
+        containerScrollY;
+
+      var newDataPoint = { x: x, y: y, value: 100 };
+
+      debouncedFetchData(newDataPoint);
+    });
+  }, []);
+
   return (
     <div className={styles.screenContainer}>
       <div className={styles.container}>
