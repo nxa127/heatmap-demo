@@ -64,7 +64,7 @@ const DashboardPage: React.FC = () => {
     <div id="heatmap" className={styles.container}>
       <iframe
         id="iframe"
-        src="http://0.0.0.0:3000/"
+        src="http://54.238.188.150/"
         width="100%"
         height="100%"
         frameBorder="0"
